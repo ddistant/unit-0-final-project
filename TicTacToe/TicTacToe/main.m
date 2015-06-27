@@ -32,7 +32,9 @@
 
 - (void) printBoard;
 
-- (void) setMove:(int)move;
+- (void) chooseMove:(int)move;
+
+- (BOOL) winOrLose;
 
 
 @property (nonatomic) NSMutableArray *spaces;
@@ -77,6 +79,12 @@
     }
     
     [self printBoard];
+}
+
+- (BOOL)winOrLose {
+    
+    
+    return: YES;
 }
 
 @end
