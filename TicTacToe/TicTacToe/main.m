@@ -8,10 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+@interface tictactoe : NSObject
+
+- (void) printBoard;
+
+@end
+
+@implementation tictactoe
+
+- (void) printBoard {
+    
+    //       top            mid         bottom
+    printf(" | | \n-----\n | | \n-----\n | | \n");
+    
+}
+
+@end
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        
+        tictactoe *game1 = [[tictactoe alloc] init];
+        [game1 printBoard];
+        
     }
     return 0;
 }
