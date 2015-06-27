@@ -10,11 +10,19 @@
 
 @interface Player : NSObject
 
-
 @end
 
 
 @implementation Player
+
+@end
+
+@interface Computer : NSObject
+
+@end
+
+
+@implementation Computer
 
 @end
 
@@ -24,12 +32,12 @@
 
 - (void) printBoard;
 
-- (void) setMove;
+- (void) setMove:(int)move;
 
 
 @property (nonatomic) NSMutableArray *spaces;
 
-@property (nonatomic) Player * player1;
+@property (nonatomic) Player * playerX;
 
 @end
 
@@ -58,13 +66,11 @@
     printf("%s|%s|%s\n-----\n%s|%s|%s\n-----\n%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String]);
 }
 
-- (void) setMove {
-    
-    int i;
+- (void) setMove:(int)i {
     
     if ([_spaces[i] isEqualToString:_spaces[i]]) {
         
-        
+        [_spaces replaceObjectAtIndex:_spaces[i] withObject: 0];
     }
 }
 
@@ -74,9 +80,17 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
+        int userInput;
+        
         Tictactoe *game1 = [[Tictactoe alloc] init];
         [game1 printLabel];
+        printf("\nHello Player 'X'\nWhere would you like to play: ");
         [game1 printBoard];
+        scanf("\n%d",&userInput);
+        
+        [game1 setMove:3];
+        
+        
         
     }
     return 0;
