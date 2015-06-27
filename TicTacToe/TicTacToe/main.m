@@ -8,17 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
-@interface tictactoe : NSObject
+@interface Player : NSObject
 
-- (void) printBoard(tictactoe *)spaces;
-
-- (void) printLabel;
-
-@property (nonatomic) NSMutableArray *spaces;
 
 @end
 
-@implementation tictactoe
+
+@implementation Player
+
+@end
+
+@interface Tictactoe : NSObject
+
+- (void) printLabel;
+
+- (void) printBoard;
+
+- (void) setMove;
+
+
+@property (nonatomic) NSMutableArray *spaces;
+
+@property (nonatomic) Player * player1;
+
+@end
+
+@implementation Tictactoe
 
 - (void) printLabel {
     
@@ -32,34 +47,25 @@
     printf("**********************************\n");
 }
 
-- (void) printBoard(tictactoe *)spaces {
+- (void) printBoard {
     
     if (self.spaces == nil) {
-        self.spaces = [[NSMutableArray alloc] initWithObjects:@" ", @" ", @" ", @" ", @" ", @" ", @" ", @" ", @" ", nil];
+        self.spaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
     }
-    
-    [self.spaces addObject: nil];
     
     printf("\n\n");
     
-    printf("%s| | \n-----\n | | \n-----\n | | \n", [_spaces[0] UTF8String]);
+    printf("%s|%s|%s\n-----\n%s|%s|%s\n-----\n%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String]);
 }
-
-@end
-
-
-@interface player : NSObject
-
-- (void) setMove;
-
-@end
-
-
-@implementation player
 
 - (void) setMove {
     
+    int i;
     
+    if ([_spaces[i] isEqualToString:_spaces[i]]) {
+        
+        
+    }
 }
 
 @end
@@ -68,7 +74,7 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        tictactoe *game1 = [[tictactoe alloc] init];
+        Tictactoe *game1 = [[Tictactoe alloc] init];
         [game1 printLabel];
         [game1 printBoard];
         
