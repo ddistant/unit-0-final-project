@@ -35,7 +35,7 @@
 - (void) chooseMove:(int)move;
 
 
-@property (nonatomic) NSMutableArray *spaces;
+@property (nonatomic) NSMutableArray *spaces; //Original spaces in the table
 
 @property (nonatomic) NSMutableArray *startingSpaces;
 
@@ -45,7 +45,7 @@
 
 @implementation Tictactoe
 
-- (void) printLabel {
+- (void) printLabel { // fancy wallpaper in the beginning
     
     printf("**********************************\n");
     printf("*  TIC                           *\n");
@@ -57,7 +57,7 @@
     printf("**********************************\n");
 }
 
-- (void) printBoard {
+- (void) printBoard { // Tic Tac Toe Table INPUTS
     
     if (self.spaces == nil) {
         self.spaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
@@ -90,7 +90,7 @@
         [_spaces replaceObjectAtIndex: a withObject: @"O"];
     }
     
-    [self printBoard];
+    [self printBoard]; //Prints tic tac toe board
     
 }
 
@@ -109,12 +109,12 @@ int main(int argc, const char * argv[]) {
         
         while (game1) {
         [game1 printBoard];
-        printf("\nHello Player 'X'\nWhere would you like to play: ");
+        printf("\nHello Player 'X'\nWhere would you like to play: "); // For First Player
         scanf("\n%d",&userInput);
         [game1 chooseMove:userInput];
         
             [game1 printBoard];
-            printf("\nHello Player 'O'\nWhere would you like to play: ");
+            printf("\nHello Player 'O'\nWhere would you like to play: "); // For Second Player
             scanf("\n%d", &userInput);
             [game1 chooseMove2:userInput];
         }
