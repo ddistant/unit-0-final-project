@@ -10,30 +10,54 @@
 
 @interface tictactoe : NSObject
 
-- (void) printBoard;
+- (void) printBoard(tictactoe *)spaces;
+
+- (void) printLabel;
+
+@property (nonatomic) NSMutableArray *spaces;
 
 @end
 
 @implementation tictactoe
 
-- (void) printBoard {
+- (void) printLabel {
     
-    NSString *spaceTopLeft = @" ";
-    NSString *spaceTopMid = @" ";
-    NSString *spaceTopRight = @" ";
-    
-    NSString *spaceMidLeft = @" ";
-    NSString *spaceMidMid = @" ";
-    NSString *spaceMidRight = @" ";
-    
-    NSString *spaceBottomLeft = @" ";
-    NSString *spaceBottomMid = @" ";
-    NSString *spaceBottomRight = @" ";
-    
-    //       top            mid         bottom
-    printf("%s|%s|%s\n-----\n%s|%s|%s\n-----\n%s|%s|%s\n", [spaceTopLeft UTF8String], [spaceTopMid UTF8String], [spaceTopRight UTF8String], [spaceMidLeft UTF8String], [spaceMidMid UTF8String], [spaceMidRight UTF8String], [spaceBottomLeft UTF8String], [spaceBottomMid UTF8String], [spaceBottomRight UTF8String]);
+    printf("**********************************\n");
+    printf("*  TIC                           *\n");
+    printf("*                                *\n");
+    printf("*              TAC               *\n");
+    printf("*                                *\n");
+    printf("*                                *\n");
+    printf("*                            TOE *\n");
+    printf("**********************************\n");
+}
 
+- (void) printBoard(tictactoe *)spaces {
     
+    if (self.spaces == nil) {
+        self.spaces = [[NSMutableArray alloc] initWithObjects:@" ", @" ", @" ", @" ", @" ", @" ", @" ", @" ", @" ", nil];
+    }
+    
+    [self.spaces addObject: nil];
+    
+    printf("\n\n");
+    
+    printf("%s| | \n-----\n | | \n-----\n | | \n", [_spaces[0] UTF8String]);
+}
+
+@end
+
+
+@interface player : NSObject
+
+- (void) setMove;
+
+@end
+
+
+@implementation player
+
+- (void) setMove {
     
     
 }
@@ -45,10 +69,9 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
         tictactoe *game1 = [[tictactoe alloc] init];
+        [game1 printLabel];
         [game1 printBoard];
         
-//        NSString *emptySpace = @" ";
-//        printf("this is where the empty spa%sce goes:", [emptySpace UTF8String]);
     }
     return 0;
 }
