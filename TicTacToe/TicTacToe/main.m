@@ -38,9 +38,11 @@
 
 - (void) printBoard;
 
-- (void) playerSelect;
+- (int) playerSelect;
 
-- (void) chooseMove:(int)move;
+- (void) chooseMove:(int)i;
+
+- (void) chooseMove2:(int)a;
 
 - (void) computerChooseMove;
 
@@ -72,7 +74,7 @@
     printf("**********************************\n");
 }
 
-- (void) playerSelect {
+- (int) playerSelect {
     
     printf("**********************************\n");
     printf("*                                *\n");
@@ -83,9 +85,9 @@
     printf("*                                *\n");
     printf("**********************************\n");
     
-    int select;
-    
-    scanf("%d", &select);
+    int s;
+    scanf("%d", &s);
+    return s;
     
 }
 
@@ -295,7 +297,7 @@ int main(int argc, const char * argv[]) {
         Tictactoe *game1 = [[Tictactoe alloc] init];
         
         [game1 printLabel];
-        [game1 playerSelect];
+        int gameMode = [game1 playerSelect];
         [game1 printBoard];
         
         //While loop for repeat
@@ -308,7 +310,7 @@ int main(int argc, const char * argv[]) {
             [game1 endGame:@"x"];
             
             
-            if (select == 1) {
+            if (gameMode == 1) {
             
             printf("\nHello Player 'O'\nWhere would you like to play: ");
             scanf("\n%d", &userInput);
