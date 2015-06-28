@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Player : NSObject // Player One Starts with X
+@interface Player : NSObject // Player X uses 'x'
 
 @end
 
@@ -17,12 +17,18 @@
 
 @end
 
-@interface Computer : NSObject // Computer automatic plays in one player mode
+@interface Computer : Player // Computer uses 'o'
+
+- (void) computerChooseMove:(int)c;
 
 @end
 
 
 @implementation Computer
+
+- (void) computerChooseMove:(int)c {
+    
+}
 
 @end
 
@@ -32,13 +38,19 @@
 
 - (void) printBoard;
 
+- (void) playerSelect;
+
 - (void) chooseMove:(int)move;
+
+- (void) computerChooseMove:(int)c;
 
 @property (nonatomic) NSMutableArray *spaces;
 
 @property (nonatomic) NSMutableArray *startingSpaces;
 
 @property (nonatomic) Player * playerX;
+
+@property (nonatomic) Computer *computer;
 
 @end
 
@@ -54,6 +66,25 @@
     printf("*                                *\n");
     printf("*                            TOE *\n");
     printf("**********************************\n");
+}
+
+- (void) playerSelect {
+    
+    printf("**********************************\n");
+    printf("*                                *\n");
+    printf("*  0) Play computer              *\n");
+    printf("*                                *\n");
+    printf("*                                *\n");
+    printf("*  1) 2-player mode              *\n");
+    printf("*                                *\n");
+    printf("**********************************\n");
+    
+    int userInput;
+    
+    if (userInput == 1) {
+        
+    }
+    
 }
 
 - (void) printBoard {
@@ -75,7 +106,7 @@
     
     if ([_spaces[i] isEqualToString:_startingSpaces[i]]) {
         
-        [_spaces replaceObjectAtIndex: i withObject: @"X"];
+        [_spaces replaceObjectAtIndex: i withObject: @"x"];
     }
     
     [self printBoard];
@@ -86,17 +117,41 @@
     
     if ([_spaces[a] isEqualToString:_startingSpaces[a]]) {
         
-        [_spaces replaceObjectAtIndex: a withObject: @"O"];
+        [_spaces replaceObjectAtIndex: a withObject: @"o"];
     }
     
     [self printBoard];
     
 }
 
-- (BOOL)winOrLose {
+- (void) computerChooseMove:(int)c {
     
+    BOOL moveChosen = NO;
     
-    return: YES;
+    while (!moveChosen) {
+        
+        if ([_spaces[c] isEqualToString:_startingSpaces[c]]) {
+            
+            [_spaces replaceObjectAtIndex: c withObject: @"o"];
+            
+            [self printBoard];
+            
+            moveChosen = YES;
+            
+        } else {
+            
+            printf("Hmmm.....");
+            
+            [self.computer computerChooseMove:arc4random_uniform(9)];
+            
+            [self printBoard];
+            
+            break;
+            
+        }
+        
+    }
+    
 }
 
 @end
@@ -109,19 +164,24 @@ int main(int argc, const char * argv[]) {
         Tictactoe *game1 = [[Tictactoe alloc] init];
         
         [game1 printLabel];
+        [game1 playerSelect];
+        [game1 printBoard];
         
         //While loop for repeat
         
         while (game1) {
-        [game1 printBoard];
-        printf("\nHello Player 'X'\nWhere would you like to play: ");
-        scanf("\n%d",&userInput);
-        [game1 chooseMove:userInput];
-        
-            [game1 printBoard];
-            printf("\nHello Player 'O'\nWhere would you like to play: ");
-            scanf("\n%d", &userInput);
-            [game1 chooseMove2:userInput];
+            
+            printf("\nHello Player 'X'\nWhere would you like to play: ");
+            scanf("\n%d",&userInput);
+            [game1 chooseMove:userInput];
+            
+//            printf("\nHello Player 'O'\nWhere would you like to play: ");
+//            scanf("\n%d", &userInput);
+//            [game1 chooseMove2:userInput];
+            
+            printf("\nHello Computer\nWhere would you like to play: ");
+            sleep(3);
+            [game1 computerChooseMove:arc4random_uniform(9)];
         }
         
     }
