@@ -19,14 +19,14 @@
 
 @interface Computer : Player // Computer uses 'o'
 
-- (void) computerChooseMove:(int)c;
+- (void) computerChooseMove;
 
 @end
 
 
 @implementation Computer
 
-- (void) computerChooseMove:(int)c {
+- (void) computerChooseMove {
     
 }
 
@@ -42,11 +42,15 @@
 
 - (void) chooseMove:(int)move;
 
-- (void) computerChooseMove:(int)c;
+- (void) computerChooseMove;
+
+- (BOOL) endGame;
 
 @property (nonatomic) NSMutableArray *spaces;
 
-@property (nonatomic) NSMutableArray *startingSpaces;
+@property (nonatomic) NSArray *startingSpaces;
+
+@property (nonatomic) NSMutableArray *computerSpaces;
 
 @property (nonatomic) Player * playerX;
 
@@ -91,7 +95,7 @@
     
     if (self.spaces == nil) {
         self.spaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
-        self.startingSpaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
+        self.startingSpaces = [[NSArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
     }
     
     printf("\n\n");
@@ -124,11 +128,15 @@
     
 }
 
-- (void) computerChooseMove:(int)c {
+- (void) computerChooseMove {
+    
+    int c;
     
     BOOL moveChosen = NO;
     
     while (!moveChosen) {
+        
+        c = arc4random_uniform(9);
         
         if ([_spaces[c] isEqualToString:_startingSpaces[c]]) {
             
@@ -142,17 +150,21 @@
             
             printf("Hmmm.....");
             
-            [self.computer computerChooseMove:arc4random_uniform(9)];
-            
-            [self printBoard];
-            
-            break;
             
         }
-        
+        printf("\n%s", moveChosen ? "yes":"no");
     }
     
 }
+
+-(BOOL) endGame {
+    for (int i =0; i < [_spaces count]; i++) {
+        
+        
+    }
+    return YES;
+}
+
 
 @end
 
@@ -180,8 +192,8 @@ int main(int argc, const char * argv[]) {
 //            [game1 chooseMove2:userInput];
             
             printf("\nHello Computer\nWhere would you like to play: ");
-            sleep(3);
-            [game1 computerChooseMove:arc4random_uniform(9)];
+            sleep(2);
+            [game1 computerChooseMove];
         }
         
     }
