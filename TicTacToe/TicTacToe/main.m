@@ -83,11 +83,9 @@
     printf("*                                *\n");
     printf("**********************************\n");
     
-    int userInput;
+    int select;
     
-    if (userInput == 1) {
-        
-    }
+    scanf("%d", &select);
     
 }
 
@@ -148,21 +146,24 @@
             
         } else {
             
-            printf("Hmmm.....");
-            
+            printf("Hmmm ... ");
+            sleep(1);
             
         }
-        printf("\n%s", moveChosen ? "yes":"no");
     }
     
 }
 
--(BOOL) endGame {
-    for (int i =0; i < [_spaces count]; i++) {
+-(void) endGame {
+    for (int i = 0; i < [_spaces count]; i++) {
         
+            
+        //012 345 678 258 036 147 048 246
         
+        //
     }
-    return YES;
+    
+    
 }
 
 
@@ -181,20 +182,28 @@ int main(int argc, const char * argv[]) {
         
         //While loop for repeat
         
-        while (game1) {
+        while (true) {
             
             printf("\nHello Player 'X'\nWhere would you like to play: ");
             scanf("\n%d",&userInput);
             [game1 chooseMove:userInput];
             
-//            printf("\nHello Player 'O'\nWhere would you like to play: ");
-//            scanf("\n%d", &userInput);
-//            [game1 chooseMove2:userInput];
+            if (select == 1) {
             
-            printf("\nHello Computer\nWhere would you like to play: ");
-            sleep(2);
+            printf("\nHello Player 'O'\nWhere would you like to play: ");
+            scanf("\n%d", &userInput);
+            [game1 chooseMove2:userInput];
+                
+            } else {
+            
+            printf("\nComputer is thinking ... ");
             [game1 computerChooseMove];
+            [game1 endGame];
+                
+            }
         }
+        
+        arryRandomNumber 
         
     }
     return 0;
