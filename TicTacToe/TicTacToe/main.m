@@ -111,6 +111,12 @@
     if ([_spaces[i] isEqualToString:_startingSpaces[i]]) {
         
         [_spaces replaceObjectAtIndex: i withObject: @"x"];
+        
+    } else {
+        
+        printf("\nThat space isn't empty! Try again!");
+        
+        [self chooseMove:i];
     }
     
     [self printBoard];
@@ -122,6 +128,12 @@
     if ([_spaces[a] isEqualToString:_startingSpaces[a]]) {
         
         [_spaces replaceObjectAtIndex: a withObject: @"o"];
+        
+    } else {
+        
+        printf("\nThat space isn't empty! Try again!");
+        
+        [self chooseMove2:a];
     }
     
     [self printBoard];
@@ -146,11 +158,14 @@
             
             moveChosen = YES;
             
+        } else if (_spaces[0] != _startingSpaces[0] && _spaces[1] != _startingSpaces[1] && _spaces[2] != _startingSpaces[2] && _spaces[3] != _startingSpaces[3] && _spaces[4] != _startingSpaces[4] && _spaces[5] != _startingSpaces[5] && _spaces[6] != _startingSpaces[6] && _spaces[7] != _startingSpaces[7] && _spaces[8] != _startingSpaces[8]) {
+            
+            break;
+            
         } else {
             
             printf("Hmmm ... ");
             sleep(1);
-            
         }
     }
     
@@ -158,11 +173,17 @@
 
 -(BOOL) endGame:(NSString *)x {
     
-    if (_spaces[0] == x && _spaces[1] == x && _spaces[2] == x) {
+    if (_spaces[0] != _startingSpaces[0] && _spaces[1] != _startingSpaces[1] && _spaces[2] != _startingSpaces[2] && _spaces[3] != _startingSpaces[3] && _spaces[4] != _startingSpaces[4] && _spaces[5] != _startingSpaces[5] && _spaces[6] != _startingSpaces[6] && _spaces[7] != _startingSpaces[7] && _spaces[8] != _startingSpaces[8]) {
+        
+        printf("\nTWO-WAY TIE!!!!");
+        
+        return YES;
+    
+    } else if (_spaces[0] == x && _spaces[1] == x && _spaces[2] == x) {
         
         if ([x isEqualToString: @"x"]) {
-        
-        printf("\nPlayer X WINS!!!!!!!!!");
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
             
             return YES;
             
@@ -278,8 +299,14 @@
             return YES;
         }
         
-    } else {
+    } else if (_spaces[0] != _startingSpaces[0] && _spaces[1] != _startingSpaces[1] && _spaces[2] != _startingSpaces[2] && _spaces[3] != _startingSpaces[3] && _spaces[4] != _startingSpaces[4] && _spaces[5] != _startingSpaces[5] && _spaces[6] != _startingSpaces[6] && _spaces[7] != _startingSpaces[7] && _spaces[8] != _startingSpaces[8]) {
         
+        printf("\nTWO-WAY TIE!!!!");
+        
+        return YES;
+        
+    } else {
+    
         return NO;
         
     }
@@ -308,6 +335,7 @@ int main(int argc, const char * argv[]) {
             scanf("\n%d",&userInput);
             [game1 chooseMove:userInput];
             [game1 endGame:@"x"];
+            [game1 endGame:@"o"];
             
             
             if (gameMode == 1) {
