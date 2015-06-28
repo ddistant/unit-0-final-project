@@ -44,7 +44,7 @@
 
 - (void) computerChooseMove;
 
-- (BOOL) endGame;
+-(BOOL) endGame:(NSString *)x;
 
 @property (nonatomic) NSMutableArray *spaces;
 
@@ -154,16 +154,134 @@
     
 }
 
--(void) endGame {
-    for (int i = 0; i < [_spaces count]; i++) {
+-(BOOL) endGame:(NSString *)x {
+    
+    if (_spaces[0] == x && _spaces[1] == x && _spaces[2] == x) {
         
+        if ([x isEqualToString: @"x"]) {
+        
+        printf("\nPlayer X WINS!!!!!!!!!");
             
-        //012 345 678 258 036 147 048 246
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
         
-        //
+    } else if (_spaces[3] == x && _spaces[4] == x && _spaces[5] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[6] == x && _spaces[7] == x && _spaces[8] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[2] == x && _spaces[5] == x && _spaces[8] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[0] == x && _spaces[3] == x && _spaces[6] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[1] == x && _spaces[4] == x && _spaces[7] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[0] == x && _spaces[4] == x && _spaces[8] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_spaces[2] == x && _spaces[4] == x && _spaces[6] == x) {
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else {
+        
+        return NO;
+        
     }
-    
-    
+        //win conditions -- 012 345 678 258 036 147 048 246
 }
 
 
@@ -182,28 +300,29 @@ int main(int argc, const char * argv[]) {
         
         //While loop for repeat
         
-        while (true) {
+        while ([game1 endGame:@"x"] == NO && [game1 endGame:@"o"] == NO) {
             
             printf("\nHello Player 'X'\nWhere would you like to play: ");
             scanf("\n%d",&userInput);
             [game1 chooseMove:userInput];
+            [game1 endGame:@"x"];
+            
             
             if (select == 1) {
             
             printf("\nHello Player 'O'\nWhere would you like to play: ");
             scanf("\n%d", &userInput);
             [game1 chooseMove2:userInput];
+            [game1 endGame:@"o"];
                 
             } else {
             
             printf("\nComputer is thinking ... ");
             [game1 computerChooseMove];
-            [game1 endGame];
+            [game1 endGame:@"o"];
                 
             }
         }
-        
-        arryRandomNumber 
         
     }
     return 0;
