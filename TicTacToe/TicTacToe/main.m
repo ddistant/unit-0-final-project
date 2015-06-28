@@ -92,16 +92,18 @@
 - (void) printBoard {
     
     if (self.spaces == nil) {
-        self.spaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
-        self.startingSpaces = [[NSArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
+        self.spaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", nil];
+        self.startingSpaces = [[NSMutableArray alloc] initWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12", @"13", @"14", @"15", nil];
     }
     
     printf("\n\n");
     
     //Tic Tac Toe Board
     
-    printf("%s|%s|%s\n-----\n%s|%s|%s\n-----\n%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String]);
+    printf("%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String],[_spaces[9] UTF8String], [_spaces[10] UTF8String], [_spaces[11] UTF8String], [_spaces[12] UTF8String], [_spaces[13] UTF8String], [_spaces[14] UTF8String], [_spaces[15] UTF8String]);
 }
+
+
 //First Player "X" if statement
 
 - (void) chooseMove:(int)i {
@@ -154,9 +156,10 @@
     
 }
 
+// 0123, 4567, 891011, 04812,371115,
 -(BOOL) endGame:(NSString *)x {
     
-    if (_spaces[0] == x && _spaces[1] == x && _spaces[2] == x) {
+    if (_spaces[0] == x && _spaces[1] == x && _spaces[2] == x && _spaces[3] == x) { //Top/First Row
         
         if ([x isEqualToString: @"x"]) {
             
@@ -171,7 +174,7 @@
             return YES;
         }
         
-    } else if (_spaces[3] == x && _spaces[4] == x && _spaces[5] == x) {
+    } else if (_spaces[3] == x && _spaces[7] == x && _spaces[11] == x &&_spaces[15] == x) { //Right Going down
         
         if ([x isEqualToString: @"x"]) {
             
@@ -186,7 +189,7 @@
             return YES;
         }
         
-    } else if (_spaces[6] == x && _spaces[7] == x && _spaces[8] == x) {
+    } else if (_spaces[4] == x && _spaces[5] == x && _spaces[6] == x &&_spaces [7] == x) { // Second Row
         
         if ([x isEqualToString: @"x"]) {
             
@@ -201,7 +204,7 @@
             return YES;
         }
         
-    } else if (_spaces[2] == x && _spaces[5] == x && _spaces[8] == x) {
+    } else if (_spaces[3] == x && _spaces[6] == x && _spaces[9] == x &&_spaces[12] == x) { // Top Right to Bottom Left
         
         if ([x isEqualToString: @"x"]) {
             
@@ -216,7 +219,7 @@
             return YES;
         }
         
-    } else if (_spaces[0] == x && _spaces[3] == x && _spaces[6] == x) {
+    } else if (_spaces[0] == x && _spaces[4] == x && _spaces[8] == x &&_spaces[12] == x) { //Left going down
         
         if ([x isEqualToString: @"x"]) {
             
@@ -231,7 +234,7 @@
             return YES;
         }
         
-    } else if (_spaces[1] == x && _spaces[4] == x && _spaces[7] == x) {
+    } else if (_spaces[8] == x && _spaces[9] == x && _spaces[10] == x &&_spaces[11] == x) { //Third Row
         
         if ([x isEqualToString: @"x"]) {
             
@@ -246,7 +249,7 @@
             return YES;
         }
         
-    } else if (_spaces[0] == x && _spaces[4] == x && _spaces[8] == x) {
+    } else if (_spaces[1] == x && _spaces[5] == x && _spaces[9] == x &&_spaces[13] == x) { //Second Row Down
         
         if ([x isEqualToString: @"x"]) {
             
@@ -261,7 +264,7 @@
             return YES;
         }
         
-    } else if (_spaces[2] == x && _spaces[4] == x && _spaces[6] == x) {
+    } else if (_spaces[2] == x && _spaces[6] == x && _spaces[10] == x &&_spaces[14] == x) { //Third row down
         
         if ([x isEqualToString: @"x"]) {
             
@@ -275,16 +278,24 @@
             
             return YES;
         }
+    } else if (_spaces[0] == x && _spaces[5] == x && _spaces[10] == x &&_spaces[15] == x) { //Top Left to Bottom Right
         
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+    
     } else {
         
         return NO;
+    
+    }
         
     }
-    //win conditions -- 012 345 678 258 036 147 048 246
+   
+    return 0;
 }
-
-
 @end
 
 
