@@ -40,9 +40,9 @@
 
 - (int) playerSelect;
 
-- (void) chooseMove:(int)i;
+- (void) chooseMove;
 
-- (void) chooseMove2:(int)a;
+- (void) chooseMove2;
 
 - (void) computerChooseMove;
 
@@ -71,7 +71,7 @@
     printf("*                                *\n");
     printf("*                                *\n");
     printf("*                            TOE *\n");
-    printf("**********************************\n");
+    printf("**********************************\n\n");
 }
 
 - (int) playerSelect {
@@ -106,37 +106,55 @@
 }
 //First Player "X" if statement
 
-- (void) chooseMove:(int)i {
+- (void) chooseMove; {
+    
+    while (true) {
+    
+    int i;
+    
+    scanf("\n%d", &i);
     
     if ([_spaces[i] isEqualToString:_startingSpaces[i]]) {
         
         [_spaces replaceObjectAtIndex: i withObject: @"x"];
         
+        break;
+        
     } else {
         
-        printf("\nThat space isn't empty! Try again!");
+        printf("\nThat space isn't empty! Try again! ");
         
-        [self chooseMove:i];
+    }
+        
     }
     
     [self printBoard];
 }
 //Second Player "O" if statement
 
-- (void) chooseMove2:(int)a  {
+- (void) chooseMove2 {
+    
+    while (true) {
+    
+    int a;
+    
+    scanf("\n%d", &a);
     
     if ([_spaces[a] isEqualToString:_startingSpaces[a]]) {
         
         [_spaces replaceObjectAtIndex: a withObject: @"o"];
         
+        break;
+        
     } else {
         
-        printf("\nThat space isn't empty! Try again!");
+        printf("\nThat space isn't empty! Try again! ");
+    }
         
-        [self chooseMove2:a];
     }
     
     [self printBoard];
+        
     
 }
 
@@ -320,7 +338,6 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        int userInput;
         Tictactoe *game1 = [[Tictactoe alloc] init];
         
         [game1 printLabel];
@@ -332,24 +349,22 @@ int main(int argc, const char * argv[]) {
         while ([game1 endGame:@"x"] == NO && [game1 endGame:@"o"] == NO) {
             
             printf("\nHello Player 'X'\nWhere would you like to play: ");
-            scanf("\n%d",&userInput);
-            [game1 chooseMove:userInput];
+            [game1 chooseMove];
             [game1 endGame:@"x"];
             [game1 endGame:@"o"];
             
             
             if (gameMode == 1) {
             
-            printf("\nHello Player 'O'\nWhere would you like to play: ");
-            scanf("\n%d", &userInput);
-            [game1 chooseMove2:userInput];
-            [game1 endGame:@"o"];
+                printf("\nHello Player 'O'\nWhere would you like to play: ");
+                [game1 chooseMove2];
+                [game1 endGame:@"o"];
                 
             } else {
-            
-            printf("\nComputer is thinking ... ");
-            [game1 computerChooseMove];
-            [game1 endGame:@"o"];
+                
+                printf("\nComputer is thinking ... ");
+                [game1 computerChooseMove];
+                [game1 endGame:@"o"];
                 
             }
         }
