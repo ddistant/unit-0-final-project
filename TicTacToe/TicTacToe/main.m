@@ -40,6 +40,8 @@
 
 - (int) playerSelect;
 
+- (int) gameSelect;
+
 - (void) chooseMove;
 
 - (void) chooseMove2;
@@ -48,11 +50,15 @@
 
 -(BOOL) endGame:(NSString *)x;
 
+-(BOOL) endFourGame:(NSString *)x;
+
 @property (nonatomic) NSMutableArray *spaces;
 
 @property (nonatomic) NSArray *startingSpaces;
 
-@property (nonatomic) NSMutableArray *computerSpaces;
+@property (nonatomic) NSMutableArray *fourSpaces;
+
+@property (nonatomic) NSArray *fourStartingSpaces;
 
 @property (nonatomic) Player * playerX;
 
@@ -91,6 +97,23 @@
     
 }
 
+- (int) gameSelect {
+    
+    printf("**********************************\n");
+    printf("*                                *\n");
+    printf("*  0) 3-by-3                     *\n");
+    printf("*                                *\n");
+    printf("*                                *\n");
+    printf("*  1) 4-by-4                     *\n");
+    printf("*                                *\n");
+    printf("**********************************\n");
+    
+    int g;
+    scanf("%d", &g);
+    return g;
+    
+}
+
 - (void) printBoard {
     
     if (self.spaces == nil) {
@@ -104,27 +127,43 @@
     
     printf("%s|%s|%s\n-----\n%s|%s|%s\n-----\n%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String]);
 }
+
+- (void) printFourBoard {
+    
+    if (self.fourSpaces == nil) {
+        self.fourSpaces = [[NSMutableArray alloc] initWithObjects:@"00", @"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11", @"12", @"13", @"14", @"15", nil];
+        self.fourStartingSpaces = [[NSArray alloc] initWithObjects:@"00", @"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08",@"09", @"10", @"11", @"12", @"13", @"14", @"15", nil];
+    }
+    
+    printf("\n\n");
+    
+    //4x4 Tic Tac Toe Board
+    
+    //Tic Tac Toe Board
+    
+    printf("%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n--------\n%s|%s|%s|%s\n", [_spaces[0] UTF8String], [_spaces[1] UTF8String], [_spaces[2] UTF8String], [_spaces[3] UTF8String], [_spaces[4] UTF8String],[_spaces[5] UTF8String],[_spaces[6] UTF8String], [_spaces[7] UTF8String], [_spaces[8] UTF8String],[_spaces[9] UTF8String], [_spaces[10] UTF8String], [_spaces[11] UTF8String], [_spaces[12] UTF8String], [_spaces[13] UTF8String], [_spaces[14] UTF8String], [_spaces[15] UTF8String]);
+}
 //First Player "X" if statement
 
 - (void) chooseMove; {
     
     while (true) {
-    
-    int i;
-    
-    scanf("\n%d", &i);
-    
-    if ([_spaces[i] isEqualToString:_startingSpaces[i]]) {
         
-        [_spaces replaceObjectAtIndex: i withObject: @"x"];
+        int i;
         
-        break;
+        scanf("\n%d", &i);
         
-    } else {
-        
-        printf("\nThat space isn't empty! Try again! ");
-        
-    }
+        if ([_spaces[i] isEqualToString:_startingSpaces[i]]) {
+            
+            [_spaces replaceObjectAtIndex: i withObject: @"x"];
+            
+            break;
+            
+        } else {
+            
+            printf("\nThat space isn't empty! Try again! ");
+            
+        }
         
     }
     
@@ -135,26 +174,25 @@
 - (void) chooseMove2 {
     
     while (true) {
-    
-    int a;
-    
-    scanf("\n%d", &a);
-    
-    if ([_spaces[a] isEqualToString:_startingSpaces[a]]) {
         
-        [_spaces replaceObjectAtIndex: a withObject: @"o"];
+        int a;
         
-        break;
+        scanf("\n%d", &a);
         
-    } else {
-        
-        printf("\nThat space isn't empty! Try again! ");
-    }
+        if ([_spaces[a] isEqualToString:_startingSpaces[a]]) {
+            
+            [_spaces replaceObjectAtIndex: a withObject: @"o"];
+            
+            break;
+            
+        } else {
+            
+            printf("\nThat space isn't empty! Try again! ");
+        }
         
     }
     
     [self printBoard];
-        
     
 }
 
@@ -329,8 +367,147 @@
         
     }
         //win conditions -- 012 345 678 258 036 147 048 246
+    
+    
 }
 
+-(BOOL) endFourGame:(NSString *)x {
+    
+    if (_fourSpaces[0] == x && _fourSpaces[1] == x && _fourSpaces[2] == x && _fourSpaces[3] == x) { //Top/First Row
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[3] == x && _fourSpaces[7] == x && _fourSpaces[11] == x &&_fourSpaces[15] == x) { //Right Going down
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[4] == x && _fourSpaces[5] == x && _fourSpaces[6] == x &&_fourSpaces [7] == x) { // Second Row
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[3] == x && _fourSpaces[6] == x && _fourSpaces[9] == x &&_fourSpaces[12] == x) { // Top Right to Bottom Left
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[0] == x && _fourSpaces[4] == x && _fourSpaces[8] == x && _fourSpaces[12] == x) { //Left going down
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[8] == x && _fourSpaces[9] == x && _fourSpaces[10] == x &&_fourSpaces[11] == x) { //Third Row
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[1] == x && _fourSpaces[5] == x && _fourSpaces[9] == x &&_fourSpaces[13] == x) { //Second Row Down
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+        
+    } else if (_fourSpaces[2] == x && _fourSpaces[6] == x && _fourSpaces[10] == x &&_fourSpaces[14] == x) { //Third row down
+        
+        if ([x isEqualToString: @"x"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        } else {
+            
+            printf("\nComputer WINS!!!!!!!");
+            
+            return YES;
+        }
+    } else if (_fourSpaces[0] == x && _fourSpaces[5] == x && _fourSpaces[10] == x &&_fourSpaces[15] == x) { //Top Left to Bottom Right
+        
+        if ([x isEqualToString: @"X"]) {
+            
+            printf("\nPlayer X WINS!!!!!!!!!");
+            
+            return YES;
+            
+        }
+        
+    } else if (_fourSpaces[0] != _fourStartingSpaces[0] && _fourSpaces[1] != _fourStartingSpaces[1] && _fourSpaces[2] != _fourStartingSpaces[2] && _fourSpaces[3] != _fourStartingSpaces[3] && _fourSpaces[4] != _fourStartingSpaces[4] && _fourSpaces[5] != _fourStartingSpaces[5] && _fourSpaces[6] != _fourStartingSpaces[6] && _fourSpaces[7] != _fourStartingSpaces[7] && _fourSpaces[8] != _fourStartingSpaces[8] && _fourSpaces[9] != _fourStartingSpaces[9] && _fourSpaces[10] != _fourStartingSpaces[10] && _fourSpaces[11] != _fourStartingSpaces[11] && _fourSpaces[12] != _fourStartingSpaces[12] && _fourSpaces[13] != _fourStartingSpaces[13] && _fourSpaces[14] != _fourStartingSpaces[14] && _fourSpaces[15] != _fourStartingSpaces[15])
+            
+            printf("\nTWO-WAY TIE!!!!");
+    
+            return YES;
+}
 
 @end
 
@@ -351,7 +528,6 @@ int main(int argc, const char * argv[]) {
             printf("\nHello Player 'X'\nWhere would you like to play: ");
             [game1 chooseMove];
             [game1 endGame:@"x"];
-            [game1 endGame:@"o"];
             
             
             if (gameMode == 1) {
